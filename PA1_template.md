@@ -106,7 +106,7 @@ Then, we recreate our original data by combining the rows that do not have `NA` 
 newData <- rbind(data[!is.na(data$steps), ], newData)
 newData <- newData[order(newData$date), ]
 ```
-Inspecting the `head` of the new data shows that the `NA` have been replaced
+Inspecting the `head` of the new data shows that the `NA` values have been replaced
 
 
 ```
@@ -118,7 +118,7 @@ Inspecting the `head` of the new data shows that the `NA` have been replaced
 ## 33 0.0754717 2012-10-01       20
 ## 45 2.0943396 2012-10-01       25
 ```
-To verify the impact of replacing the `NA`values, we plot a histogram of the total number of steps each day and take the mean and median of the total number of steps taken per day
+To verify the impact of replacing the `NA`values, we plot a histogram of the total number of steps each day and take the mean and median
 
 
 ```r
@@ -143,7 +143,7 @@ median(stepsPerDay$totalSteps)
 ```
 ## [1] 10766.19
 ```
-Compared with the results generated with the original data, We can see there is very little variation in the histogram shape and the median value.
+Compared with the results generated with the original data, we can see there is a small variation in the histogram shape and the median value.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
@@ -154,7 +154,7 @@ To find out the differences in activity patterns between weekdays and weekends w
 weekendData <- newData[as.POSIXlt(newData$date)$wday %in% c(0, 6), ]
 weekdayData <- newData[!(as.POSIXlt(newData$date)$wday %in% c(0, 6)), ]
 ```
-Next, we recombine the data adding a factor column that indicates if the date is a weekend or a weekday
+Next, we recombine the data adding a factor column that tells us if the date is a weekend or a weekday
 
 
 ```r
@@ -162,7 +162,7 @@ dayType <- factor(c("weekday", "weekend"))
 newDataWithDayType <- rbind(cbind(weekendData, list(dayType = dayType[2])), cbind(weekdayData, list(dayType = dayType[1])))
 ```
 
-Finally, we calculate the average number of steps per 5-minute interval during weekends and weekdays and plot these values in two graph panel, using the `lattice` library
+Finally, we calculate the average number of steps per 5-minute interval during weekends and weekdays and plot these values in a two graph panel, using the `lattice` library
 
 
 ```r
