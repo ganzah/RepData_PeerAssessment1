@@ -7,7 +7,7 @@ output:
 
 
 ## Loading and preprocessing the data
-First, we are going to unzip the dataset ad load the data from the csv file:
+First, we are going to unzip the dataset and load it from the csv file:
 
 
 ```r
@@ -16,7 +16,7 @@ data <- read.csv("activity.csv")
 data$date <- as.Date(data$date, format = "%Y-%m-%d")
 ```
 
-Note that we convert the "date" column values to the Date class.
+Note that we convert the "date" column values to the `Date` class.
 
 ## What is mean total number of steps taken per day?
 
@@ -49,7 +49,7 @@ median(stepsPerDay$totalSteps, na.rm = TRUE)
 
 ## What is the average daily activity pattern?
 
-We also aggregate the data by the 5 minute interval, so that we can take average number of steps taken across all days, showing this result in a time series plot.
+We also aggregate the data by the 5 minute interval, so that we can take the average number of steps taken across all days, showing this result in a time series plot.
 
 
 ```r
@@ -59,9 +59,13 @@ plot(averageStepsPerInterval$interval, averageStepsPerInterval$steps, type = "l"
 
 ![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
 
+Using the data, we find out the interval which has, in average, the maximum number of steps taken.
+
+
 ```r
 intervalWithMaximumNumberOfStepsInAverage <- averageStepsPerInterval[averageStepsPerInterval$steps == max(averageStepsPerInterval$steps), "interval"]
 ```
+
 We conclude that the 835th interval is the interval with the maximum number of steps in average. 
 
 ## Imputing missing values
@@ -122,7 +126,7 @@ stepsPerDay <- aggregate(list(totalSteps = newData$steps), by = list(date = newD
 hist(stepsPerDay$totalSteps, main = "Histogram of total number of steps per day", xlab = "Steps per day")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
 
 ```r
 mean(stepsPerDay$totalSteps)
@@ -167,4 +171,4 @@ averageStepsPerIntervalAndDayType <- aggregate(steps ~ interval + dayType, newDa
 xyplot(steps ~ interval | dayType, averageStepsPerIntervalAndDayType, type = "l", layout = c(1, 2), xlab = "Interval identifier", ylab = "Average number of steps")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
